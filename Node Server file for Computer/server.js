@@ -69,7 +69,7 @@ function postSequence(sequence,callback) {
 //In order to send keyboard input to the roku, we use the keyress/Lit_* endpoint which can be any alphanumeric character
 //This function turns a string into a series of these commands with delays of 100ms built in
 //NOTE: this currently ignores anything that isn't lowercase alpha
-function createTypeSequence(text) {
+function createTypeSequence(text,request) {
     var sequence = [];
     for (i=0; i<text.length; i++) {
         var c = text.charCodeAt(i); 
@@ -350,7 +350,7 @@ var handlers = {
     "/roku/type":function(request,response) {
         getRequestData(request,function(data) {
             var text = data.replace().toLowerCase(); 
-            var sequence = createTypeSequence(text);
+            var sequence = createTypeSequence(text,request);
             postSequence(sequence,function() {
 
             });
@@ -361,7 +361,7 @@ var handlers = {
         getRequestData(request,function(data) {
             var text = data.replace().toLowerCase();
             var sequence = [].concat([			
-                createTypeSequence(text),
+                createTypeSequence(text,request),
             ]);
             postSequence(sequence);
             response.end("OK");	 //respond with OK before the operation finishes
@@ -387,7 +387,7 @@ var handlers = {
                 150,
                 rokuAddress[request.query.room]+"keypress/select",
                 800,
-            ],createTypeSequence(text),[
+            ],createTypeSequence(text,request),[
                 rokuAddress[request.query.room]+"keypress/right",
                 150,
                 rokuAddress[request.query.room]+"keypress/right",
@@ -422,7 +422,7 @@ var handlers = {
                 250,
                 rokuAddress[request.query.room]+"keypress/select",
                 250,
-            ],createTypeSequence(text),[
+            ],createTypeSequence(text,request),[
                 rokuAddress[request.query.room]+"keypress/right",
                 250,
                 rokuAddress[request.query.room]+"keypress/right",
