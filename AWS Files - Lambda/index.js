@@ -1,4 +1,4 @@
-var APP_ID = "amzn1.ask.skill.f234023084808234234a08ed94324324723423"; //replace this with your app ID to make use of APP_ID verification
+var APP_ID = "amzn1.ask.skill.f88e1389-94e8-43b5-8d65-a7b110a25d29"; //replace this with your app ID to make use of APP_ID verification
 
 var AlexaSkill = require("./AlexaSkill");
 var serverinfo = require("./serverinfo");
@@ -13,7 +13,7 @@ var AlexaRoku = function () {
 };
 
 var roomMap = {
-    'test1': 'livingroom',
+    'amzn1.ask.device.AHT2EBQPJ3ROPFTRY2D3MFFXQAILPWNYHWHECFOJQNCTRJNTTPDO2RUER54OD345Q36JA3OSDPARZSOTQBVDM4HOFLHDBGCMQJCSFHFMLDXGAS4BHW75CDLHRI7V55ODQ3MKU4ZMAP7XLSIQFDQYQUDCFYHQ': 'amzn1.ask.device.AHT2EBQPJ3ROPFTRY2D3MFFXQAILVC2BRNTP7P26OEWL2E374DBR4ABSGAXCIVSXWRNQDNBG5TJ5ZWESDDVNQKXI47YRJHG5GMPASPQ6BLT2GGAYVVPGVSRXWXJC6CBAVFOUL55MRS2AFK5A6DHGBY5GOXCA',
     'test2': 'bedroom'
 };
 
@@ -301,6 +301,6 @@ AlexaRoku.prototype.intentHandlers = {
 
 exports.handler = function (event, context) {
     var roku = new AlexaRoku();
-    console.log(context.System.device.deviceId);
+    console.log(event.context.System.device.deviceId);
     roku.execute(event, context);
 };
