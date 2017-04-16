@@ -7,14 +7,17 @@ function AlexaSkill(appId) {
 
 AlexaSkill.prototype.requestHandlers = {
     LaunchRequest: function (event, context, response) {
+        event.session.fromDevice = context.System.device.deviceId;
         this.eventHandlers.onLaunch.call(this, event.request, event.session, response);
     },
 
     IntentRequest: function (event, context, response) {
+        event.session.fromDevice = context.System.device.deviceId;
         this.eventHandlers.onIntent.call(this, event.request, event.session, response);
     },
 
     SessionEndedRequest: function (event, context) {
+        event.session.fromDevice = context.System.device.deviceId;
         this.eventHandlers.onSessionEnded(event.request, event.session);
         context.succeed();
     }
